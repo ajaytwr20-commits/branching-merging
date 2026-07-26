@@ -1,0 +1,130 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 24px;
+  background: #f4f7fb;
+  color: #333;
+}
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  max-width: 920px;
+  margin: 0 auto 24px;
+  padding: 16px 24px;
+  background: linear-gradient(135deg, #dc2626, #ef4444);
+  border-radius: 14px;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
+}
+.navbar .brand {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #ffffff;
+}
+.navbar .nav-links {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.navbar .nav-links a {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.92);
+  font-weight: 600;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+.navbar .nav-links a:hover {
+  color: #eff6ff;
+  transform: translateY(-1px);
+}
+h1 {
+  margin-bottom: 8px;
+}
+.todo-app {
+  max-width: 520px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+  padding: 24px;
+}
+.add-form {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+.add-form input {
+  flex: 1;
+  padding: 12px 14px;
+  border: 1px solid #d8dfea;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+.add-form button {
+  padding: 12px 18px;
+  border: none;
+  border-radius: 8px;
+  background: #2563eb;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.todo-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.todo-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border: 1px solid #e5eaf2;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  background: #f9fbff;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: transform 0.25s ease, opacity 0.25s ease, background 0.25s ease, border-color 0.25s ease, max-height 0.25s ease, margin-bottom 0.25s ease, padding 0.25s ease;
+  overflow: hidden;
+}
+.todo-item.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.todo-item.removing {
+  opacity: 0;
+  transform: translateY(-12px);
+  max-height: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  border-color: transparent;
+}
+.todo-item.completed {
+  background: #e5f0ff;
+  border-color: #c7d8f3;
+}
+.todo-item.completed .task {
+  text-decoration: line-through;
+  color: #777;
+}
+.task {
+  flex: 1;
+  margin-right: 12px;
+}
+.actions button {
+  border: none;
+  background: transparent;
+  color: #2563eb;
+  cursor: pointer;
+  font-size: 0.95rem;
+  margin-left: 8px;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+.actions button:hover {
+  transform: translateY(-1px);
+}
+.actions button.delete {
+  color: #dc2626;
+}
