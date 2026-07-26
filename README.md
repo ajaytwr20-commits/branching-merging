@@ -1,4 +1,4 @@
-# Todo List Repo
+# Todo List app
 
 A simple repository containing a static HTML todo list application.
 
