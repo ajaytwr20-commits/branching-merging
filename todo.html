@@ -58,6 +58,27 @@
       border-radius: 10px;
       margin-bottom: 12px;
       background: #f9fbff;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: transform 0.25s ease, opacity 0.25s ease, background 0.25s ease, border-color 0.25s ease, max-height 0.25s ease, margin-bottom 0.25s ease, padding 0.25s ease;
+      overflow: hidden;
+    }
+    .todo-item.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .todo-item.removing {
+      opacity: 0;
+      transform: translateY(-12px);
+      max-height: 0;
+      margin-bottom: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+      border-color: transparent;
+    }
+    .todo-item.completed {
+      background: #e5f0ff;
+      border-color: #c7d8f3;
     }
     .todo-item.completed .task {
       text-decoration: line-through;
@@ -74,6 +95,10 @@
       cursor: pointer;
       font-size: 0.95rem;
       margin-left: 8px;
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
+    .actions button:hover {
+      transform: translateY(-1px);
     }
     .actions button.delete {
       color: #dc2626;
@@ -122,6 +147,7 @@
         li.appendChild(span);
         li.appendChild(actions);
         todoList.appendChild(li);
+        requestAnimationFrame(() => li.classList.add('visible'));
       });
     }
 
@@ -140,8 +166,17 @@
     }
 
     function removeTask(index) {
-      tasks.splice(index, 1);
-      renderTasks();
+      const item = todoList.children[index];
+      if (item) {
+        item.classList.add('removing');
+        setTimeout(() => {
+          tasks.splice(index, 1);
+          renderTasks();
+        }, 220);
+      } else {
+        tasks.splice(index, 1);
+        renderTasks();
+      }
     }
   </script>
 </body>
