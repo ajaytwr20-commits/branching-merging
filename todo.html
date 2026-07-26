@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Todo List</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 24px;
+      background: #f4f7fb;
+      color: #333;
+    }
+    h1 {
+      margin-bottom: 8px;
+    }
+    .todo-app {
+      max-width: 520px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+      padding: 24px;
+    }
+    .add-form {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .add-form input {
+      flex: 1;
+      padding: 12px 14px;
+      border: 1px solid #d8dfea;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+    .add-form button {
+      padding: 12px 18px;
+      border: none;
+      border-radius: 8px;
+      background: #2563eb;
+      color: #fff;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    .todo-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .todo-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      border: 1px solid #e5eaf2;
+      border-radius: 10px;
+      margin-bottom: 12px;
+      background: #f9fbff;
+    }
+    .todo-item.completed .task {
+      text-decoration: line-through;
+      color: #777;
+    }
+    .task {
+      flex: 1;
+      margin-right: 12px;
+    }
+    .actions button {
+      border: none;
+      background: transparent;
+      color: #2563eb;
+      cursor: pointer;
+      font-size: 0.95rem;
+      margin-left: 8px;
+    }
+    .actions button.delete {
+      color: #dc2626;
+    }
+  </style>
+</head>
+<body>
+  <div class="todo-app">
+    <h1>Todo List</h1>
+    <p>Use this simple HTML todo list to add, complete, or remove tasks.</p>
+    <form class="add-form" onsubmit="return addTask();">
+      <input id="new-task" type="text" placeholder="Enter a new task" />
+      <button type="submit">Add</button>
+    </form>
+    <ul class="todo-list" id="todo-list"></ul>
+  </div>
+  <script>
+    const todoList = document.getElementById('todo-list');
+    const newTaskInput = document.getElementById('new-task');
+    const tasks = [];
+
+    function renderTasks() {
+      todoList.innerHTML = '';
+      tasks.forEach((task, index) => {
+        const li = document.createElement('li');
+        li.className = 'todo-item' + (task.completed ? ' completed' : '');
+
+        const span = document.createElement('span');
+        span.className = 'task';
+        span.textContent = task.text;
+
+        const actions = document.createElement('div');
+        actions.className = 'actions';
+
+        const toggleButton = document.createElement('button');
+        toggleButton.textContent = task.completed ? 'Undo' : 'Done';
+        toggleButton.onclick = () => toggleTask(index);
+
+        const deleteButton = document.createElement('button');
+        deleteButton.className = 'delete';
+        deleteButton.textContent = 'Delete';
+        deleteButton.onclick = () => removeTask(index);
+
+        actions.appendChild(toggleButton);
+        actions.appendChild(deleteButton);
+        li.appendChild(span);
+        li.appendChild(actions);
+        todoList.appendChild(li);
+      });
+    }
+
+    function addTask() {
+      const text = newTaskInput.value.trim();
+      if (!text) return false;
+      tasks.push({ text, completed: false });
+      newTaskInput.value = '';
+      renderTasks();
+      return false;
+    }
+
+    function toggleTask(index) {
+      tasks[index].completed = !tasks[index].completed;
+      renderTasks();
+    }
+
+    function removeTask(index) {
+      tasks.splice(index, 1);
+      renderTasks();
+    }
+  </script>
+</body>
+</html>
